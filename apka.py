@@ -18,7 +18,7 @@ def run():
 
     @st.cache_data(ttl=3600)
     def load_data():
-        url = "https://docs.google.com/spreadsheets/d/1Y-FgxHStc3wdAHOJ9cH73hN8IMzG9tE-uh4pERqqVWw/edit?gid=1638491539#gid=1638491539"
+        url = "https://docs.google.com/spreadsheets/d/1Y-FgxHStc3wdAHOJ9cH73hN8IMzG9tE-uh4pERqqVWw/edit?usp=sharing"
         try:
             return pd.read_csv(url, sep=";")
         except Exception as e:
