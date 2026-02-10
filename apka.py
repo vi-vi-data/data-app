@@ -21,7 +21,7 @@ def run():
         url = "https://github.com/vi-vi-data/data-app/releases/download/v1/Tesk_Task___Mail_Retention.csv"
         return pd.read_csv(
             url,
-            sep=";",
+            sep=",",
             engine="python",
             low_memory=False
         )
