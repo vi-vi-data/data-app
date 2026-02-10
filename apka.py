@@ -17,8 +17,11 @@ def run():
 
     
     @st.cache_data
-    def load_data(path: str):
-        return pd.read_csv(path, sep=';')
+    def load_data():
+    return pd.read_csv(
+        "https://drive.google.com/uc?id=1AVSKQOU7oUldOtA3gT4twAYeN9T2cUoO",
+        sep=";"
+    )
     
     df = load_data('Tesk_Task___Mail_Retention.csv')
 
