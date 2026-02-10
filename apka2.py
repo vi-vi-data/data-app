@@ -16,11 +16,12 @@ def run():
     st.markdown("Тest vs Control, p-value, AI-висновки ")
     
     
-    @st.cache_data
-    def load_data(path: str):
-        return pd.read_csv(path, sep=';')
-    
-    df = load_data('Tesk_Task___Mail_Retention.csv')
+    @st.cache_data(ttl=3600)
+    def load_data():
+        url = "https://github.com/vi-vi-data/data-app/releases/download/v1/Tesk_Task___Mail_Retention.csv"
+        return pd.read_csv(url, sep=";", on_bad_lines="skip", engine="python")
+        
+    df = load_data()
     
     with st.expander("Ukážka datasetu"):
         st.dataframe(df.head())
