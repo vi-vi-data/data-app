@@ -16,14 +16,15 @@ def run():
     st.markdown("Dashboard для інтерактивного аналізу даних та моніторингу ключових метрик")
 
 
-    @st.cache_data(ttl=3600)
+    @st.cache_data
     def load_data():
         url = "https://github.com/vi-vi-data/data-app/releases/download/v1/Tesk_Task__Mail_Retention.csv"
-        try:
-            return pd.read_csv(url, sep=";")
-        except Exception as e:
-            st.error(f"Не вдалося завантажити дані з Google Drive: {e}")
-            st.stop()
+        return pd.read_csv(
+            url,
+            sep=";",
+            engine="python",
+            low_memory=False
+        )
 
     df = load_data()
     with st.expander("Ukážka datasetu"):
