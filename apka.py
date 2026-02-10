@@ -14,17 +14,13 @@ def run():
     # -------КОНФІГУРАЦІЯ-----
     st.title("Data App")
     st.markdown("Dashboard для інтерактивного аналізу даних та моніторингу ключових метрик")
-    @st.cache_data
-    @st.cache_data
+    @st.cache_data(ttl=3600)
     def load_data():
-        url = "https://github.com/vi-vi-data/data-app/releases/download/v1/Tesk_Task__Mail_Retention.csv"
-        return pd.read_csv(
-            url,
-            sep=";",
-            storage_options={"User-Agent": "Mozilla/5.0"}
-        )
-
+        url = "https://github.com/vi-vi-data/data-app/releases/download/v1/Tesk_Task___Mail_Retention.csv"
+        return pd.read_csv(url, sep=";", on_bad_lines="skip", engine="python")
+        
     df = load_data()
+    
     with st.expander("Ukážka datasetu"):
         st.dataframe(df.head())
     st.divider()
