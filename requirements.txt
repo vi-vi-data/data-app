@@ -1,4 +1,7 @@
 streamlit
 pandas
 matplotlib
+seaborn
 groq
+apka
+apka2
