@@ -16,15 +16,17 @@ def run():
     st.markdown("Dashboard для інтерактивного аналізу даних та моніторингу ключових метрик")
 
 
-    @st.cache_data
+    @st.cache_data(ttl=3600)
     def load_data():
-        return pd.read_csv("https://drive.google.com/file/d/1AVSKQOU7oUldOtA3gT4twAYeN9T2cUoO/view?usp=sharing",sep=";")
-
+        url = "https://drive.google.com/uc?id=1AVSKQOU7oUldOtA3gT4twAYeN9T2cUoO&export=download"
+        try:
+            return pd.read_csv(url, sep=";")
+        except Exception as e:
+            st.error(f"Не вдалося завантажити дані з Google Drive: {e}")
+            st.stop()
     
-    df = load_data()
-
-    with st.expander("Ukážka datasetu"):
-        st.dataframe(df.head())
+        with st.expander("Ukážka datasetu"):
+            st.dataframe(df.head())
     st.divider()
     
     #--------БІЧНА ПАНЕЛЬ------
