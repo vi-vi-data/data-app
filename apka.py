@@ -332,9 +332,9 @@ def run():
     
     
     #------П"ята Секція: ШІ овервю------------
-    st.header("🧠 AI Summary по періоду")
+    st.header("AI Summary по періоду")
     
-    if st.button("🔥 Згенерувати AI самарі", type="primary"):
+    if st.button("Згенерувати AI самарі", type="primary"):
         client = Groq(api_key=st.secrets["GROQ_API_KEY"])
     
         prompt = f"""Ти — старший аналітик email retention. Період фільтра: {date_from} – {date_to}.
