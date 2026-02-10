@@ -18,7 +18,7 @@ def run():
 
     @st.cache_data
     def load_data():
-        url = "https://github.com/vi-vi-data/data-app/releases/download/v1/Tesk_Task__Mail_Retention.csv"
+        url = "https://github.com/vi-vi-data/data-app/releases/download/v1/Tesk_Task___Mail_Retention.csv"
         return pd.read_csv(
             url,
             sep=";",
