@@ -15,12 +15,13 @@ def run():
     st.title("Data App")
     st.markdown("Dashboard для інтерактивного аналізу даних та моніторингу ключових метрик")
     @st.cache_data
+    @st.cache_data
     def load_data():
         url = "https://github.com/vi-vi-data/data-app/releases/download/v1/Tesk_Task__Mail_Retention.csv"
         return pd.read_csv(
             url,
             sep=";",
-            engine="python"
+            storage_options={"User-Agent": "Mozilla/5.0"}
         )
 
     df = load_data()
