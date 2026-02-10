@@ -167,6 +167,8 @@ def run():
     
     
     #----------ШІ овервю--------
+    today = df["date"].max()
+    
     st.subheader("AI рекомендація по тесту")
     if st.button("Згенерувати висновок та рекомендацію", type="primary"):
         prompt = f"""Ти — старший аналітик email retention. Період фільтра: {date_from} – {date_to}.
