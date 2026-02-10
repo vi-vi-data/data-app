@@ -24,9 +24,10 @@ def run():
         except Exception as e:
             st.error(f"Не вдалося завантажити дані з Google Drive: {e}")
             st.stop()
-    
-        with st.expander("Ukážka datasetu"):
-            st.dataframe(df.head())
+
+    df = load_data()
+    with st.expander("Ukážka datasetu"):
+        st.dataframe(df.head())
     st.divider()
     
     #--------БІЧНА ПАНЕЛЬ------
