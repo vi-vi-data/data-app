@@ -171,24 +171,36 @@ def run():
     
     st.subheader("AI рекомендація по тесту")
     if st.button("Згенерувати висновок та рекомендацію", type="primary"):
-        prompt = f"""Ти — старший аналітик email retention. Період фільтра: {date_from} – {date_to}.
-    
-    Порівняння дня: {today.date()} vs {prev_label}
-    
-    Open rate: {open_recent:.1%} (Δ {delta_open:+.1%})
-    CTR: {ctr_recent:.1%} (Δ {delta_ctr:+.1%})
-    Conversion rate: {conv_recent:.1%} (Δ {delta_conv:+.1%})
-    Sent (сьогодні): {len(last_day):,}
-    Buyers (у фільтрі): {buyers_cnt:,}
-    
-    Останні 14 днів (динаміка):
-    {daily.tail(14)[['sent','open_rate','ctr','conversion_rate']].round(3).to_string()}
-    
-    Напиши коротке самарі українською (4–6 речень):
-    • Що покращилось / погіршилось відносно вчора (або середнього)
-    • Де найбільш помітні зміни
-    • 2 прості рекомендації наступних кроків
-    """  
+        prompt =prompt = f"""
+Ти — senior data analyst з A/B тестів в email retention. Пиши українською, коротко і по суті.
+
+Контекст:
+- Сегмент: {segment}
+- Період: {date_from} – {date_to}
+- Тест: {selected_test}
+- Розмір вибірки:
+  • Users total: {total_users}
+  • Users Test: {test_users}
+  • Users Control: {ctrl_users}
+  • Events Test: {test_events}
+  • Events Control: {ctrl_events}
+
+A/B результати (Control vs Test):
+{ab_table[['Метрика','Control','Test','Lift','p-value','Значущість']].to_string(index=False)}
+
+Завдання:
+1) Дай висновок: чи варто “вигравшим” вважати Test, Control, чи результат невизначений.
+2) Поясни це простими словами, спираючись на Lift + p-value (поріг значущості 0.05).
+3) Оціни ризики: чи достатній розмір вибірки/подій (дуже коротко).
+4) Дай 2–3 рекомендації наступних кроків (наприклад: продовжити тест, змінити сегмент, перевірити трекінг, зосередитись на метриці, що має значущий ефект).
+5) Якщо є “значуще (негатив)” — запропонуй 2 гіпотези, чому так могло статись.
+
+Формат відповіді:
+- 1 заголовок (1 рядок)
+- 4–6 коротких булетів
+- Без води, без повторів чисел більше ніж потрібно.
+"""
+
         client = Groq(api_key=st.secrets["GROQ_API_KEY"])
         with st.spinner("Groq думає..."):
             chat = client.chat.completions.create(
