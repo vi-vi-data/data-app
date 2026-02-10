@@ -18,7 +18,7 @@ def run():
 
     @st.cache_data
     def load_data():
-        return pd.read_csv("https://drive.google.com/uc?id=1AVSKQOU7oUldOtA3gT4twAYeN9T2cUoO",sep=";")
+        return pd.read_csv("https://drive.google.com/file/d/1AVSKQOU7oUldOtA3gT4twAYeN9T2cUoO/view?usp=sharing",sep=";")
 
     
     df = load_data()
